@@ -14,7 +14,7 @@ Boolean createCompetition = true;
 Boolean createTitle = true;
 
 List<String> items = getCategoryService().listValues("Agency/Competition");
-
+List<String> agencyOnly = getCategoryService().listValues("Agency");
 
 if(items.contains(agency)){
   createAgency = false;
@@ -34,6 +34,10 @@ if(createCompetition){
 }
 if(createTitle){
    getCategoryService().createCategoryValue("Agency/Competition", Arrays.asList(agency, competition), title, "");
+}
+
+if(!agencyOnly.contains(agency)){
+ getCategoryService().createCategoryValue("Agency", agency, "");
 }
 
 Document grant = getDocumentService().lockDocument(document);
