@@ -1,6 +1,7 @@
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Arrays;
 import com.altirnao.aodocs.custom.Document;
 import com.altirnao.aodocs.custom.DocumentService;
 import com.altirnao.aodocs.custom.ReadableDocument;
