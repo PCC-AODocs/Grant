@@ -16,15 +16,10 @@ Document file = documentService.lockDocument(document);
 // Get Title from Attachment
 //---------------------------------------
 com.google.common.collect.ImmutableSet<Attachment> attachments = file.getAttachments();
-if(attachments.size() == 0){
-  throw new Exception("Cannot create a File without an attachment.  Please attach a file before saving.");
-
-//Attachment exists, continue
-}else{
-
-Attachment a = (Attachment)attachments.iterator().next();
-file.setTitle(a.getTitle());
-
+if(attachments.size() > 0){
+  Attachment a = (Attachment)attachments.iterator().next();
+  file.setTitle(a.getTitle());
+}
 
 //---------------------------------------
 //TEST 1 - does File have a parent Grant?
@@ -131,10 +126,6 @@ if (!grants.isEmpty()) {
    file.setHierarchicalCategory("Agency/Competition", Arrays.asList(agency, competition, title));
 
 }  //end if grant not null
- 
-
-
-} // end attachment exists
 
 }
 
