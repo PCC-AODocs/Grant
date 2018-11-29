@@ -34,13 +34,6 @@ if (!grants.isEmpty()) {
 
    ReadableDocument grant = (ReadableDocument) grants.get(0);
 
-  List<String> agencyOnly = getCategoryService().listValues("Agency");
-  String agency = (String)grant.getField("Agency");
-
-  if(!agencyOnly.contains(agency)){
-   getCategoryService().createCategoryValue("Agency", agency, "");
-  }
-
    task.addFromRelatedDocument("Grant to Task", grant);
    task.setField("Project Title", grant.getTitle());
    task.setField("Agency", grant.getField("Agency"));
