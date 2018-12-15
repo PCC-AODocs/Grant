@@ -1,0 +1,26 @@
+import java.util.List;
+import java.util.Locale;
+import com.altirnao.aodocs.common.script.*;
+import com.altirnao.aodocs.custom.*;
+
+public void executeAsync(ReadableDocument doc) throws Exception {
+
+debug("Log debug message");
+DocumentSearchRequest docSearch = new DocumentSearchRequest("Grant");
+List<ReadableDocuments> grants = getDocumentService().findDocuments(docSearch);
+
+debug("Found " + grants.size() + " grants.");
+for(ReadableDocument grant: grants){
+  if(Integer.parseInt(grant.getField("Grant Id").toString()) == 8){
+    debug("Working on grant: " + grant.getTitle());
+    List fileIds = grant.getToRelatedDocumentIds("Grant to File");
+    for (String fileId : fileIds){
+      Document file= getDocumentService().loadDocument(fileId);
+     getDocumentService().store(file);
+   }
+  }
+}
+
+debug("Update all Files completed");
+
+}
